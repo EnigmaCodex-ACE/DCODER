@@ -35,7 +35,6 @@
   --dl-color-decoder-lightblue: #407bffff;
   --dl-space-space-oneandhalfunits: 24px;
 }
-
 .button {
   color: var(--dl-color-gray-black);
   display: inline-block;
@@ -100,10 +99,6 @@
 }
 
 
-
-
-
-
 /* The popup form - hidden by default */
 .form-popup {
   display: none;
@@ -111,14 +106,15 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%,-50%);
-  border: 3px solid #f1f1f1;
+  border: 1px solid rgba(0, 0, 0, 0.35);
   z-index: 9;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
 /* Add styles to the form container */
 .form-container {
   max-width: 300px;
-  padding: 10px;
+  padding: 20px;
   background-color: white;
 }
 
@@ -158,3 +154,4 @@
 .form-container .btn:hover, .open-button:hover {
   opacity: 1;
 }
+
