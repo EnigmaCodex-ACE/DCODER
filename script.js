@@ -6,39 +6,41 @@ function showform(){
 }
 
 function closeForm(flag){
-    var name = document.getElementById("name").value;
-    var mail = document.getElementById("mail").value;
-    var num = document.getElementById("num").value;
-    
-    if(check(name,mail,num)){
-        var gfgDb = openDatabase('mydb', '1.0', 'Test DB', 2 * 1024 * 1024);  
-        var msg;
-        gfgDb.transaction(function (tx) {  
-            console.log("creation")
-        tx.executeSql('CREATE TABLE IF NOT EXISTS USERINFO (name , email, mobile)');  
-        tx.executeSql('INSERT INTO USERINFO (name , email, mobile) VALUES (?,?,?)',[name,mail,num]); 
-        //console.log("creted") 
-        });
-
-        gfgDb.transaction(function (tx) { 
-            tx.executeSql('SELECT * FROM USERINFO', [], function (tx, results) { 
-               var len = results.rows.length, i; 
-               msg = "<p>Found rows: " + len + "</p>";
-               for (i = 0; i < len; i++) { 
-                console.log(results.rows[i]); 
-             } 
-            }, null); 
-         });
-        //console.log("set");
+    if(flag){
+        var name = document.getElementById("name").value;
+        var mail = document.getElementById("mail").value;
+        var num = document.getElementById("num").value;
         
+        if(check(name,mail,num)){
+            var gfgDb = openDatabase('mydb', '1.0', 'Test DB', 2 * 1024 * 1024);  
+            var msg;
+            gfgDb.transaction(function (tx) {  
+                console.log("creation")
+            tx.executeSql('CREATE TABLE IF NOT EXISTS USERINFO (name , email, mobile)');  
+            tx.executeSql('INSERT INTO USERINFO (name , email, mobile) VALUES (?,?,?)',[name,mail,num]); 
+            //console.log("creted") 
+            });
 
-        document.getElementById('download').click();
-        document.getElementById("myForm").style.display = "none";
+            gfgDb.transaction(function (tx) { 
+                tx.executeSql('SELECT * FROM USERINFO', [], function (tx, results) { 
+                var len = results.rows.length, i; 
+                msg = "<p>Found rows: " + len + "</p>";
+                for (i = 0; i < len; i++) { 
+                    console.log(results.rows[i]); 
+                } 
+                }, null); 
+            });
+            //console.log("set");
+            
+
+            document.getElementById('download').click();
+            document.getElementById("myForm").style.display = "none";
+        }
+        else{
+            alert("please enter all/correct details");
+        }
     }
-    else{
-        alert("please enter all/correct details");
-    }
-    
+    else{document.getElementById("myForm").style.display = "none";}   
 }
 
 
